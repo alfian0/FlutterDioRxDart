@@ -27,6 +27,7 @@ class _GenresViewState extends State<GenresView> {
       builder: (context, AsyncSnapshot<Result<MovieResponse, NetworkError>> snapshot) {
         return snapshot.data?.when(
             success: (movies) {
+              print(movies.movies?[0].title);
               return Container();
             },
             failure: (error) {
