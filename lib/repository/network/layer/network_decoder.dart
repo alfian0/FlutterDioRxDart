@@ -18,4 +18,18 @@ class NetworkDecoder {
       rethrow;
     }
   }
+
+  K decodes<K>({required Response<dynamic> response, required K responseType}) {
+    try {
+      if (response.data is List) {
+        var list = response.data as List;
+        var dataList = List<K>.from(list.map((item) => (responseType as BaseNetworkModel).fromJson(item)).toList()) as K;
+        return dataList;
+      } else {
+        return (responseType as BaseNetworkModel).fromJson(response.data);
+      }
+    } on TypeError catch (e) {
+      rethrow;
+    }
+  }
 }
