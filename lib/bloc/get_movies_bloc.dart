@@ -9,8 +9,8 @@ class MoviesListBloc {
   final BehaviorSubject<Result<MovieResponse, NetworkError>> _subject = BehaviorSubject<Result<MovieResponse, NetworkError>>();
 
   getMovies() async {
-    Result<MovieResponse, NetworkError> response = await NetworkExecuter.shared.execute<MovieResponse, MovieResponse>(
-        route: ClientApi.popularMovies(),
+    Result<MovieResponse, NetworkError> response = await NetworkExecuter.shared.execute(
+        route: const ClientApi.popularMovies('97d6484898db52712cf7cd8c9c2f985b', 'en-US', 2),
         responseType: MovieResponse()
     );
     _subject.sink.add(response);

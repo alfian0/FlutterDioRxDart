@@ -18,19 +18,20 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ClientApi {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() popularMovies,
+    required TResult Function(String apiKey, String language, int page)
+        popularMovies,
     required TResult Function() discoverMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? popularMovies,
+    TResult Function(String apiKey, String language, int page)? popularMovies,
     TResult Function()? discoverMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? popularMovies,
+    TResult Function(String apiKey, String language, int page)? popularMovies,
     TResult Function()? discoverMovies,
     required TResult orElse(),
   }) =>
@@ -76,6 +77,7 @@ abstract class _$PopularMoviesCopyWith<$Res> {
   factory _$PopularMoviesCopyWith(
           _PopularMovies value, $Res Function(_PopularMovies) then) =
       __$PopularMoviesCopyWithImpl<$Res>;
+  $Res call({String apiKey, String language, int page});
 }
 
 /// @nodoc
@@ -87,54 +89,97 @@ class __$PopularMoviesCopyWithImpl<$Res> extends _$ClientApiCopyWithImpl<$Res>
 
   @override
   _PopularMovies get _value => super._value as _PopularMovies;
+
+  @override
+  $Res call({
+    Object? apiKey = freezed,
+    Object? language = freezed,
+    Object? page = freezed,
+  }) {
+    return _then(_PopularMovies(
+      apiKey == freezed
+          ? _value.apiKey
+          : apiKey // ignore: cast_nullable_to_non_nullable
+              as String,
+      language == freezed
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_PopularMovies extends _PopularMovies {
-  const _$_PopularMovies() : super._();
+  const _$_PopularMovies(this.apiKey, this.language, this.page) : super._();
+
+  @override
+  final String apiKey;
+  @override
+  final String language;
+  @override
+  final int page;
 
   @override
   String toString() {
-    return 'ClientApi.popularMovies()';
+    return 'ClientApi.popularMovies(apiKey: $apiKey, language: $language, page: $page)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _PopularMovies);
+        (other.runtimeType == runtimeType &&
+            other is _PopularMovies &&
+            const DeepCollectionEquality().equals(other.apiKey, apiKey) &&
+            const DeepCollectionEquality().equals(other.language, language) &&
+            const DeepCollectionEquality().equals(other.page, page));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(apiKey),
+      const DeepCollectionEquality().hash(language),
+      const DeepCollectionEquality().hash(page));
+
+  @JsonKey(ignore: true)
+  @override
+  _$PopularMoviesCopyWith<_PopularMovies> get copyWith =>
+      __$PopularMoviesCopyWithImpl<_PopularMovies>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() popularMovies,
+    required TResult Function(String apiKey, String language, int page)
+        popularMovies,
     required TResult Function() discoverMovies,
   }) {
-    return popularMovies();
+    return popularMovies(apiKey, language, page);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? popularMovies,
+    TResult Function(String apiKey, String language, int page)? popularMovies,
     TResult Function()? discoverMovies,
   }) {
-    return popularMovies?.call();
+    return popularMovies?.call(apiKey, language, page);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? popularMovies,
+    TResult Function(String apiKey, String language, int page)? popularMovies,
     TResult Function()? discoverMovies,
     required TResult orElse(),
   }) {
     if (popularMovies != null) {
-      return popularMovies();
+      return popularMovies(apiKey, language, page);
     }
     return orElse();
   }
@@ -172,8 +217,17 @@ class _$_PopularMovies extends _PopularMovies {
 }
 
 abstract class _PopularMovies extends ClientApi {
-  const factory _PopularMovies() = _$_PopularMovies;
+  const factory _PopularMovies(
+          final String apiKey, final String language, final int page) =
+      _$_PopularMovies;
   const _PopularMovies._() : super._();
+
+  String get apiKey => throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
+  int get page => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$PopularMoviesCopyWith<_PopularMovies> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -216,7 +270,8 @@ class _$_DiscoverMovies extends _DiscoverMovies {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() popularMovies,
+    required TResult Function(String apiKey, String language, int page)
+        popularMovies,
     required TResult Function() discoverMovies,
   }) {
     return discoverMovies();
@@ -225,7 +280,7 @@ class _$_DiscoverMovies extends _DiscoverMovies {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? popularMovies,
+    TResult Function(String apiKey, String language, int page)? popularMovies,
     TResult Function()? discoverMovies,
   }) {
     return discoverMovies?.call();
@@ -234,7 +289,7 @@ class _$_DiscoverMovies extends _DiscoverMovies {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? popularMovies,
+    TResult Function(String apiKey, String language, int page)? popularMovies,
     TResult Function()? discoverMovies,
     required TResult orElse(),
   }) {

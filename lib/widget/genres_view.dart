@@ -31,7 +31,7 @@ class _GenresViewState extends State<GenresView> {
               return Container();
             },
             failure: (error) {
-              return Text(error.localizedErrorMessage ?? 'Error', style: TextStyle(color: Colors.white),);
+              return Text(error.localizedErrorMessage ?? 'Error', style: const TextStyle(color: Colors.white),);
             }
         ) ?? _buildLoadingWidget();
       },
@@ -42,7 +42,7 @@ class _GenresViewState extends State<GenresView> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+        children: const <Widget>[
           SizedBox(
             height: 25,
             width: 25,

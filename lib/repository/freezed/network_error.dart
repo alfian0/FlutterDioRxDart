@@ -12,7 +12,7 @@ class NetworkError with _$NetworkError implements Exception{
   const factory NetworkError.connectivity({String? message}) = _Connectivity;
 
   String? get localizedErrorMessage {
-    return this.when<String?>(
+    return when<String?>(
       type: (error) => error,
       connectivity: (message) => message,
       request: (DioError error) => error.message,

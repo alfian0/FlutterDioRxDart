@@ -1,16 +1,17 @@
 import 'package:flutter_application/repository/network/interface/http_request_protocol.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'client_api.freezed.dart';
 
 @freezed
 class ClientApi extends HttpRequestProtocol with _$ClientApi {
   const ClientApi._() : super();
-  const factory ClientApi.popularMovies() = _PopularMovies;
+  const factory ClientApi.popularMovies(String apiKey, String language, int page) = _PopularMovies;
   const factory ClientApi.discoverMovies() = _DiscoverMovies;
 
   @override
   // TODO: implement baseUrl
-  String get baseUrl => 'https://api.themoviedb.org/3';
+  String get baseUrl => dotenv.env['BASE_URL'] ?? 'https://api.themoviedb.org/3';
 
   @override
   // TODO: implement body
@@ -36,7 +37,7 @@ class ClientApi extends HttpRequestProtocol with _$ClientApi {
   // TODO: implement path
   String get path {
     return this.maybeWhen<String>(
-      popularMovies: () => '/movie/top_rated',
+      popularMovies: (apiKey, language, page) => '/movie/top_rated',
       discoverMovies: () => '/discover/movie',
       orElse: () => ''
     );
@@ -46,7 +47,7 @@ class ClientApi extends HttpRequestProtocol with _$ClientApi {
   // TODO: implement queryParameters
   Map<String, dynamic>? get queryParameters {
     return this.maybeWhen(
-      popularMovies: () => { 'api_key': '97d6484898db52712cf7cd8c9c2f985b', 'language': 'en-US', 'page': 1},
+      popularMovies: (apiKey, language, page) => { 'api_key': apiKey, 'language': language, 'page': page},
       orElse: () => null,
     );
   }
